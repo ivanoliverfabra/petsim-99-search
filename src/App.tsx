@@ -317,30 +317,36 @@ function CategoryTab({
             >
               <ArrowDownWideNarrow />
             </FilterButton>
-            <FilterSelect
-              options={[
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "All",
-              ]}
-              value={filters.tier === "all" ? "All" : filters.tier.toString()}
-              disabled={category !== "Potion"}
-              onChange={(value) => {
-                if (value[0] === "All") {
-                  setFilters((prev) => ({ ...prev, tier: "all" }));
-                } else {
-                  setFilters((prev) => ({ ...prev, tier: parseInt(value[0]) }));
-                }
-              }}
-            />
+            {category === "Potion" && (
+              <FilterSelect
+                options={[
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "All",
+                ]}
+                tooltipContent="Filter by potion tier"
+                value={filters.tier === "all" ? "All" : filters.tier.toString()}
+                disabled={category !== "Potion"}
+                onChange={(value) => {
+                  if (value[0] === "All") {
+                    setFilters((prev) => ({ ...prev, tier: "all" }));
+                  } else {
+                    setFilters((prev) => ({
+                      ...prev,
+                      tier: parseInt(value[0]),
+                    }));
+                  }
+                }}
+              />
+            )}
           </div>
           <input
             type="text"
@@ -366,14 +372,18 @@ function FilterSelect({
   value,
   onChange,
   disabled,
+  tooltipContent,
 }: {
   options: string[];
   value: string;
   onChange: (value: string[]) => void;
   disabled?: boolean;
+  tooltipContent?: string;
 }) {
   return (
     <select
+      data-tooltip-id="main-tooltip"
+      data-tooltip-content={tooltipContent}
       disabled={disabled}
       value={value}
       onChange={(e) => {

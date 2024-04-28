@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-white;
+    font-family: "Inter";
+  }
+
+  * {
+    border-color: theme("colors.slate.900");
+  }
+
+  /* scrollbar thin, rounded, no background, */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: theme("colors.slate.800");
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .light-scrollbar::-webkit-scrollbar-thumb {
+    background-color: theme("colors.slate.200");
+  }
+
+  .light-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+}

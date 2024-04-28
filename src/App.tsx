@@ -203,7 +203,7 @@ function CategoryTab({
       filteredItems = filteredItems.filter((item) => item.shiny);
     }
 
-    if (category === "Potion") {
+    if (category === "Potion" || category === "Enchant") {
       if (filters.tier !== "all") {
         filteredItems = filteredItems.filter(
           (item) => item.tier === filters.tier
@@ -317,24 +317,16 @@ function CategoryTab({
             >
               <ArrowDownWideNarrow />
             </FilterButton>
-            {category === "Potion" && (
+            {(category === "Potion" || category === "Enchant") && (
               <FilterSelect
-                options={[
-                  "1",
-                  "2",
-                  "3",
-                  "4",
-                  "5",
-                  "6",
-                  "7",
-                  "8",
-                  "9",
-                  "10",
-                  "All",
-                ]}
-                tooltipContent="Filter by potion tier"
+                options={
+                  category === "Potion"
+                    ? ["All", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+                    : ["All", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+                }
+                tooltipContent="Filter by potion/enchant tier"
                 value={filters.tier === "all" ? "All" : filters.tier.toString()}
-                disabled={category !== "Potion"}
+                disabled={category !== "Potion" && category !== "Enchant"}
                 onChange={(value) => {
                   if (value[0] === "All") {
                     setFilters((prev) => ({ ...prev, tier: "all" }));
